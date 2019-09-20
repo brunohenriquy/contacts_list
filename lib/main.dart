@@ -1,3 +1,4 @@
+import 'package:contacts_list/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -12,18 +13,6 @@ class MyApp extends StatelessWidget {
       ),
       home: HomeScreen(),
     );
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
 
