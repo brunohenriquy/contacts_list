@@ -7,6 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'contact_screen.dart';
 
+enum OrderOptions { orderaz, orderza }
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -31,6 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Contacts"),
         backgroundColor: Colors.red,
         centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton<OrderOptions>(
+            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Ordenar de A -Z"),
+                value: OrderOptions.orderaz,
+              ),
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Ordenar de Z -A"),
+                value: OrderOptions.orderza,
+              ),
+            ],
+            onSelected: _orderList,
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
@@ -66,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     image: _contacts[index].img != null
                         ? FileImage(File(_contacts[index].img))
                         : AssetImage("images/person.png"),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -201,5 +219,22 @@ class _HomeScreenState extends State<HomeScreen> {
         _contacts = list;
       });
     });
+  }
+
+  void _orderList(OrderOptions result) {
+    switch (result) {
+      case OrderOptions.orderaz:
+        _contacts.sort((a, b) {
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+        break;
+      case OrderOptions.orderza:
+        _contacts.sort((a, b) {
+          return b.name.toLowerCase().compareTo(a.name.toLowerCase());
+        });
+        break;
+    }
+
+    setState(() {});
   }
 }

@@ -70,6 +70,7 @@ class _ContactScreenState extends State<ContactScreen> {
                       image: _editedContact.img != null
                           ? FileImage(File(_editedContact.img))
                           : AssetImage("images/person.png"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -170,7 +171,6 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   void _showPictureOptions(BuildContext context) {
-
     showModalBottomSheet(
       context: context,
       builder: (context) {
